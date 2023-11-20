@@ -27,7 +27,7 @@ body {
 .lettersSection {
     display: grid;
     grid: repeat(6, 75px) / repeat(5, 75px);
-    gap: 15px 7gaerpx;
+    gap: 15px 7px;
 }
 
 /*COLORS*/
