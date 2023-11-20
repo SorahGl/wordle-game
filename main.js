@@ -99,7 +99,7 @@ async function wordle () {
     document.addEventListener("keydown", function handleKeyPress (e) {
         const action = e.key;
 
-        if (done || isLoading) {
+        if (done) {
             return;
         }
         
