@@ -46,6 +46,17 @@ async function wordle () {
 
     //enter a users currentGuess
     const commit = async () => {
+        
+        
+        const guessParts = currentGuess.split("");
+        let allRight = true;
+        const map = makeMap(wordParts);
+
+        if (currentGuess.length !== ANSWER_LENGTH) {
+            // do nothing
+            return;
+          }
+
         //validate users word
         const res = await fetch('https://words.dev-apis.com/validate-word', {method: 'POST', body: JSON.stringify({word: currentGuess})})
         const {validWord} = await res.json();
@@ -53,10 +64,6 @@ async function wordle () {
             markInvalidWord()
             return;
         }
-        
-        const guessParts = currentGuess.split("");
-        let allRight = true;
-        const map = makeMap(wordParts);
           
         for (let i = 0; i < ANSWER_LENGTH; i++) {
             
@@ -88,7 +95,7 @@ async function wordle () {
         if (allRight) {
             done = true
         } else if (currentRow === ROUNDS) {
-            alert(`You lost! The word was ${word}.`);
+            alert(`You lost!The word was ${word}.`);
             done = true;
         }
     
