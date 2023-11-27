@@ -1,9 +1,6 @@
 /*BODY*/
-* {
-    box-sizing: border-box;
-    font-family: cursive;
-}
 body {
+    font-family: cursive;
     display: flex;
     flex-direction: column;
     align-items: center;

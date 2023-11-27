@@ -15,8 +15,6 @@ async function wordle () {
     const {word: wordResponse} = await response.json();
     const word = wordResponse.toUpperCase();
     const wordParts = word.split("");
-    console.log(word);
-    console.log(wordParts);
 
     //mark an invalid word
     const markInvalidWord = () => {
@@ -72,7 +70,6 @@ async function wordle () {
                 //turn green
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("correct");
                 map[guessParts[i]]--;
-                console.log(map[guessParts]);
             }}
             //check for doubles
         for (let i = 0; i < ANSWER_LENGTH; i++) {
@@ -83,7 +80,6 @@ async function wordle () {
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("close");
                 allRight = false;
                 map[guessParts[i]]--;
-                console.log(map[guessParts]);
             } else {
                 //turn gray
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("wrong");
