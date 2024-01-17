@@ -3,8 +3,28 @@ let done = false;
 const ANSWER_LENGTH = 5;
 const ROUNDS = 6;
 const letters = document.querySelectorAll('.letters');
+const keyboard = document.querySelectorAll('.keyboard');
+const button = document.getElementById('directionButton');
+const instructions = document.getElementById('instructions');
+const back = document.getElementById('back');
+const enter = document.getElementById('enter');
 let currentRow = 0;
+let direction = false;
 
+const revealDirections = () => {
+
+    button.addEventListener('click', () => {
+        if (button.innerText === 'Game Directions') {
+            instructions.style.display = 'flex';
+            button.innerText = 'Hide Directions';
+            direction = true;
+        } else if (button.innerText === 'Hide Directions'){
+            instructions.style.display = 'none';
+            button.innerText = 'Game Directions';
+            direction = false;
+        }
+    });
+};
 
 async function wordle () {
     let currentGuess = "";
@@ -69,6 +89,7 @@ async function wordle () {
             if (guessParts[i] === wordParts[i]) {
                 //turn green
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("correct");
+                document.getElementById(guessParts[i]).classList.add("correctkeyboard");
                 map[guessParts[i]]--;
             }}
             //check for doubles
@@ -78,11 +99,13 @@ async function wordle () {
             } else if (map[guessParts[i]] && map[guessParts[i]] > 0){
                  //turn yellow
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("close");
+                document.getElementById(guessParts[i]).classList.add("closekeyboard");
                 allRight = false;
                 map[guessParts[i]]--;
             } else {
                 //turn gray
                 letters[currentRow * ANSWER_LENGTH + i].classList.add("wrong");
+                document.getElementById(guessParts[i]).classList.add("wrong");
                 allRight = false;
             }}
             
@@ -99,10 +122,11 @@ async function wordle () {
     }
     
 
+    
     document.addEventListener("keydown", function handleKeyPress (e) {
         const action = e.key;
 
-        if (done) {
+        if (done || direction) {
             return;
         }
         
@@ -116,6 +140,34 @@ async function wordle () {
             //do nothing
         }
     });
+
+    //Adds a letter from the on screen keyboard
+    keyboard.forEach((key) => {
+        key.addEventListener('click', (e) => {
+            const action = e.target.id;
+            if (done || direction) {
+                return;
+            }
+            addLetter(action);
+        })
+    })
+
+    //backspaces a letter from the on screen keyboard
+    back.addEventListener('click', () => {
+        if (done || direction) {
+            return;
+        }
+        backspace();
+    })
+
+    //commits a word from the on screen keyboard
+    enter.addEventListener('click', () => {
+        if (done || direction) {
+            return;
+        }
+        commit();
+    })
+    }
 
     //checks if a key is a letter
     function isLetter(letter) {
@@ -134,6 +186,7 @@ async function wordle () {
         }
         return obj;
     }
-}
+
 
 wordle();
+revealDirections();
