@@ -8,6 +8,8 @@ const button = document.getElementById('directionButton');
 const instructions = document.getElementById('instructions');
 const back = document.getElementById('back');
 const enter = document.getElementById('enter');
+const trophy = document.getElementById('trophy');
+const simpleTrophy = document.getElementById('simpleTrophy');
 let currentRow = 0;
 let direction = false;
 
@@ -112,7 +114,12 @@ async function wordle () {
         currentRow++;
         currentGuess = '';
         if (allRight) {
+            trophy.removeAttribute('hidden');
             done = true
+            setTimeout(() => {
+                trophy.setAttribute('hidden', true);
+                simpleTrophy.removeAttribute('hidden');
+            }, 3000);
         } else if (currentRow === ROUNDS) {
             alert(`You lost!The word was ${word}.`);
             done = true;

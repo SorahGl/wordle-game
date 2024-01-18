@@ -6,6 +6,7 @@
     <title>Daily Word Game</title>
     <link rel="icon" type="image/png" href="./pictures/favicon.png" />
     <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/53de96a3b5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -19,6 +20,13 @@
     <div id="instructions">
         <h2>Directions</h2>
         <p>Type in a five letter word using either the on-screen or your own keyboard. <br>Only real words will be accepted. <br> A <span id="greenWord">GREEN</span> background indicates the correct letter in the correct position. <br> A <span id="yellowWord">YELLOW</span> background indicates the correct letter in an incorrect position. <br> A <span id="grayWord">GRAY</span> background indicates an incorrect letter. <br> Keep guessing until you win!</p>
+    </div>
+
+    <div id="trophy" class="trophy" hidden>
+        <i class="fa-solid fa-award fa-beat fa-10x" style="color: #d6c100;"></i>
+    </div>
+    <div id="simpleTrophy" class="trophy" hidden>
+        <i class="fa-solid fa-award fa-10x" style="color: #d6c100;"></i>
     </div>
 
     <div class="lettersSection">
